@@ -18,9 +18,9 @@ jobs:
       # Set up Docker
       - name: Install Docker
         uses: docker://docker:stable
-      # Build the Docker image
+     # Build the Docker image
       - name: Build image
-        run: docker build -t myapp .
+        run: docker build -t myapp -f https://github.com/MicrosoftLearning/Docker-Build.git/path/to/Dockerfile .
       # Read the IP address from the file
       - name: Read IP address
         id: ip_address
