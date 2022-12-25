@@ -1,0 +1,21 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # Check out the code
+      - uses: actions/checkout@v2
+      # Set up Python
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      # Install dependencies
+      - run: pip install -r requirements.txt
+      # Run the server
+      - run: python server.py
