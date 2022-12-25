@@ -15,3 +15,15 @@ There are several alternatives to npm (the Node Package Manager) that can be use
 3. ied: ied is a package manager that is designed to be simple and easy to use. It has a minimalist command set and integrates with the system package manager (e.g. apt on Ubuntu) to reduce the number of dependencies that need to be installed.
 
 There are also other package managers available for Node.js, such as npm-check and npm-install-missing, that offer additional functionality or address specific use cases. You can choose the package manager that best fits your needs and workflow.
+
+### Will the action in github run the in the background?
+
+By default, the steps in a GitHub Actions workflow run in the foreground, meaning that they are executed one after the other and the workflow will not complete until all steps have finished running. However, you can use the & operator at the end of the command to run the server in the background as a child process of the shell.
+
+For example, you can modify the npm start step in your workflow as follows:
+
+      - run: npm start &
+
+This will cause the server to be started in the background and the workflow will continue to the next step without waiting for the server to complete. The server will continue running as long as the workflow is active, and it will be terminated when the workflow completes or is cancelled.
+
+Keep in mind that the & operator only works on Unix-like systems (such as Linux and macOS), and it may not be available on other platforms. If you need to run the server in the background on a different platform, you will need to use a different method, such as a process manager or a screen/tmux session.
