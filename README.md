@@ -1,4 +1,4 @@
-# easy-server-actions
+# easy-server-actions Node (NPM)
 
 This workflow is triggered on a push event to the master branch and consists of a single job with four steps. The first step checks out the code, the second step sets up Node.js, the third step installs the dependencies, and the fourth step runs the server.
 
