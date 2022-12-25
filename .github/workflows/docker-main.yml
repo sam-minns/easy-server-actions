@@ -22,13 +22,13 @@ jobs:
       # Read the IP address from the file
       - name: Read IP address
         id: ip_address
-        run: cat ./ip_address.txt
+        run: cat ip_address.txt
       # Run the Docker container
       - name: Run container
         run: docker run -d -p 8080:8080 -e IP_ADDRESS=${{ steps.ip_address.outputs.text }} myapp
       # Save the IP address to a file
       - name: Save IP address
-        run: echo "The IP address of the VM is ${{ steps.ip_address.outputs.ip }}" >> ip_address.txt
+        run: echo "The IP address of the VM is ${{ steps.ip_address.outputs.text }}" >> ip_address.txt
       # Install dependencies
       - run: pip install -r requirements.txt
       # Run the server
