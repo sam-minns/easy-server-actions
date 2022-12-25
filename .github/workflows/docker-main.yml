@@ -21,11 +21,6 @@ jobs:
       # Build the Docker image
       - name: Build image
         run: docker build -t myapp .
-      # Get IP address
-      - name: Get IP address
-        run: |
-          IP_ADDRESS=$(dig +short ${GITHUB_ACTIONS_RUNNER_NETWORK_INTERFACE_NAME}.vm.githubusercontent.com)
-          echo "The IP address of the VM is ${IP_ADDRESS}" >> ip_address.txt
       # Read the IP address from the file
       - name: Read IP address
         id: ip_address
