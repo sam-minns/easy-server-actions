@@ -1,26 +1,13 @@
-name: CI
-
-on:
-  push:
-    branches:
-      - master
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
       # Check out the code
       - uses: actions/checkout@v2
-      # Set up Python
-      - uses: actions/setup-python@v2
-        with:
-          python-version: 3.9
+      # Clone the repository
+      - run: git clone https://github.com/MicrosoftLearning/Docker-Build.git
       # Set up Docker
       - name: Install Docker
         uses: docker://docker:stable
       # Build the Docker image
       - name: Build image
-        run: docker build -t myapp .
+        run: docker build -t myapp -f Docker-Build/Dockerfile .
       # Read the IP address from the file
       - name: Read IP address
         id: ip_address
