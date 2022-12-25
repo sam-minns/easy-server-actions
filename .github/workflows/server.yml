@@ -8,7 +8,7 @@ on:
 jobs:
   build:
     strategy:
-      parallel: 4
+      max-parallel: 4
     runs-on: ubuntu-latest
     steps:
       # Check out the code
