@@ -28,10 +28,6 @@ jobs:
       # Run the Docker container
       - name: Run container
         run: docker run -d -p 8080:8080 -e IP_ADDRESS=${{ steps.ip_address.outputs.text }} myapp
-      # Retrieve metadata about the workflow run
-      - name: Get metadata
-        id: metadata
-        uses: actions/meta@v1
       # Save the IP address to a file
       - name: Save IP address
         run: echo "The IP address of the VM is ${{ steps.metadata.outputs.ip }}" >> .github/workflows/ip_address.txt
