@@ -27,3 +27,9 @@ For example, you can modify the npm start step in your workflow as follows:
 This will cause the server to be started in the background and the workflow will continue to the next step without waiting for the server to complete. The server will continue running as long as the workflow is active, and it will be terminated when the workflow completes or is cancelled.
 
 Keep in mind that the & operator only works on Unix-like systems (such as Linux and macOS), and it may not be available on other platforms. If you need to run the server in the background on a different platform, you will need to use a different method, such as a process manager or a screen/tmux session.
+
+### Python Server
+
+This workflow is similar to the npm script but it uses the actions/setup-python action to set up Python and the pip command to install dependencies from a requirements.txt file. It also uses the python command to run the server.
+
+You can customize this workflow to suit your specific needs. For example, you might want to use a different version of Python or run additional steps for testing and deployment.
