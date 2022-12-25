@@ -15,6 +15,13 @@ jobs:
       - uses: actions/setup-python@v2
         with:
           python-version: 3.9
+      # Retrieve metadata about the workflow run
+      - name: Get metadata
+        id: metadata
+        uses: actions/meta@v1
+      # Log the IP address of the VM
+      - name: Log IP address
+        run: echo "The IP address of the VM is ${{ steps.metadata.outputs.ip }}"
       # Install dependencies
       - run: pip install -r requirements.txt
       # Run the server
