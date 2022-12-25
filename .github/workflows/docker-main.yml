@@ -21,6 +21,11 @@ jobs:
       # Build the Docker image
       - name: Build image
         run: docker build -t myapp .
+      # Get IP address
+      - name: Get IP address
+        run: |
+          IP_ADDRESS=$(dig +short ${GITHUB_ACTIONS_RUNNER_NETWORK_INTERFACE_NAME}.vm.githubusercontent.com)
+          echo "The IP address of the VM is ${IP_ADDRESS}" >> ip_address.txt
       # Read the IP address from the file
       - name: Read IP address
         id: ip_address
@@ -28,15 +33,7 @@ jobs:
       # Run the Docker container
       - name: Run container
         run: docker run -d -p 8080:8080 -e IP_ADDRESS=${{ steps.ip_address.outputs.text }} myapp
-      # Retrieve metadata about the workflow run
-      - name: Get metadata
-        id: metadata
-        uses: actions/meta@v1
-      # Save the IP address to a file
-      - name: Save IP address
-        run: echo "The IP address of the VM is ${{ steps.metadata.outputs.ip }}" >> ip_address.txt
       # Install dependencies
       - run: pip install -r requirements.txt
       # Run the server
       - run: python server.py
-
