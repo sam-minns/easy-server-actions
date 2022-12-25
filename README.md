@@ -28,7 +28,7 @@ This will cause the server to be started in the background and the workflow will
 
 Keep in mind that the & operator only works on Unix-like systems (such as Linux and macOS), and it may not be available on other platforms. If you need to run the server in the background on a different platform, you will need to use a different method, such as a process manager or a screen/tmux session.
 
-### Python Server
+### Python Server (ubuntu-ci-py)
 
 This workflow is similar to the npm script but it uses the actions/setup-python action to set up Python and the pip command to install dependencies from a requirements.txt file. It also uses the python command to run the server.
 
