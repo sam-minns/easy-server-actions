@@ -26,17 +26,19 @@ jobs:
       # Read the IP address from the file
       - name: Read IP address
         id: ip_address
-        run: cat $GITHUB_WORKSPACE/ip_address.txt
+        run: cat $GITHUB_WORKSPACE/.github/workflows/ip_address.txt
       # Run the Docker container
       - name: Run container
         run: docker run -d -p 8000:8080 -e IP_ADDRESS=${{ steps.ip_address.outputs.text }} myapp
+      # Make the IP address file writable
+      - run: chmod u+w,go+r $GITHUB_WORKSPACE/.github/workflows/ip_address.txt
       # Save the IP address to a file
       - name: Save IP address
         run: echo "The IP address of the VM is ${{ steps.ip_address.outputs.text }}" >> $GITHUB_WORKSPACE/.github/workflows/ip_address.txt
       # Install dependencies
       - run: pip install -r $GITHUB_WORKSPACE/.github/workflows/requirements.txt
       # Run the server
-      - run: python server.py
+      - run: python $GITHUB_WORKSPACE/.github/workflows/server.py
       # Delete the Docker container
       - name: Delete container
         run: docker rm -f myapp
