@@ -40,3 +40,4 @@ jobs:
       # Delete the Docker container
       - name: Delete container
         run: docker rm -f myapp
+
