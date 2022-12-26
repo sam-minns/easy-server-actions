@@ -9,30 +9,34 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    # Check out the code
-    - uses: actions/checkout@v2
-    # Clone the repository
-    - run: git clone https://github.com/MicrosoftLearning/Docker-Build.git
-    # Set up Docker
-    - name: Install Docker
-      uses: docker://docker:stable
-    # Build the Docker image
-    - name: Build image
-      run: docker build -t myapp -f Docker-Build/Dockerfile .
-    # Read the IP address from the file
-    - name: Read IP address
-      id: ip_address
-      run: cat $GITHUB_WORKSPACE/ip_address.txt
-    # Run the Docker container
-    - name: Run container
-      run: docker run -d -p 8080:8080 -e IP_ADDRESS=${{ steps.ip_address.outputs.text }} myapp
-    # Save the IP address to a file
-    - name: Save IP address
-      run: echo "The IP address of the VM is ${{ steps.ip_address.outputs.text }}" >> $GITHUB_WORKSPACE/ip_address.txt
-    # Install dependencies
-    - run: pip install -r $GITHUB_WORKSPACE/requirements.txt
-    # Run the server
-    - run: python server.py
-    # Delete the Docker container
-    - name: Delete container
-      run: docker rm -f myapp
+      # Check out the code
+      - uses: actions/checkout@v2
+      # Set up Node.js
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 14.x
+      # Clone the repository
+      - run: git clone https://github.com/MicrosoftLearning/Docker-Build.git
+      # Set up Docker
+      - name: Install Docker
+        uses: docker://docker:stable
+      # Build the Docker image
+      - name: Build image
+        run: docker build -t myapp -f Docker-Build/Dockerfile .
+      # Read the IP address from the file
+      - name: Read IP address
+        id: ip_address
+        run: cat $GITHUB_WORKSPACE/ip_address.txt
+      # Run the Docker container
+      - name: Run container
+        run: docker run -d -p 8080:8080 -e IP_ADDRESS=${{ steps.ip_address.outputs.text }} myapp
+      # Save the IP address to a file
+      - name: Save IP address
+        run: echo "The IP address of the VM is ${{ steps.ip_address.outputs.text }}" >> $GITHUB_WORKSPACE/ip_address.txt
+      # Install dependencies
+      - run: pip install -r $GITHUB_WORKSPACE/requirements.txt
+      # Run the server
+      - run: python server.py
+      # Delete the Docker container
+      - name: Delete container
+        run: docker rm -f myapp
