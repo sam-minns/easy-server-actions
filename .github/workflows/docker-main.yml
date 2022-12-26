@@ -29,7 +29,7 @@ jobs:
         run: cat $GITHUB_WORKSPACE/ip_address.txt
       # Run the Docker container
       - name: Run container
-        run: docker run -d -p 8080:8080 -e IP_ADDRESS=${{ steps.ip_address.outputs.text }} myapp
+        run: docker run -d -p 8000:8080 -e IP_ADDRESS=${{ steps.ip_address.outputs.text }} myapp
       # Save the IP address to a file
       - name: Save IP address
         run: echo "The IP address of the VM is ${{ steps.ip_address.outputs.text }}" >> $GITHUB_WORKSPACE/ip_address.txt
@@ -40,4 +40,3 @@ jobs:
       # Delete the Docker container
       - name: Delete container
         run: docker rm -f myapp
-
